@@ -1,5 +1,26 @@
-steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'europe-west2-docker.pkg.dev/molten-catalyst-351111/bld/simple-todo-list-app-01:$TAG_NAME', '.' ]
+ # [START cloudbuild_simple_app_image_yaml]
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 
+           'europe-west2-docker.pkg.dev/molten-catalyst-351111/bld/simple-todo-list-app-01:${TAG_NAME}', '.']
+  # [END cloudbuild_simple_app_image_yaml]
 
-images: [europe-west2-docker.pkg.dev/molten-catalyst-351111/bld/simple-todo-list-app-01:$TAG_NAME]
+  # [START cloudbuild_simple_app_push_yaml]
+  # Docker push to Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push',  'europe-west2-docker.pkg.dev/molten-catalyst-351111/bld/simple-todo-list-app-01:${TAG_NAME}']
+  # [END cloudbuild_simple_app_push_yaml]
+  
+  # # [START cloudbuild_simple_app_deploy_yaml]
+  # # Deploy to Cloud Run
+  # - name: google/cloud-sdk
+  #   args: ['gcloud', 'run', 'deploy', 'simple-app-${TAG_NAME}', 
+  #          '--image=europe-west2-docker.pkg.dev/molten-catalyst-351111/bld/simple-todo-list-app-01:${TAG_NAME}', 
+  #          '--region', 'europe-west2', '--platform', 'managed', 
+  #          '--allow-unauthenticated']
+  # # [END cloudbuild_simple_app_deploy_yaml]
+  
+# Store images in Google Artifact Registry 
+images:
+  - europe-west2-docker.pkg.dev/molten-catalyst-351111/bld/simple-todo-list-app-01:${TAG_NAME}
+# [END cloudbuild_simple_app_yaml]

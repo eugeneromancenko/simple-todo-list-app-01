@@ -1,5 +1,5 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'europe-docker.pkg.dev/$PROJECT_ID/eu.gcr.io:$TAG_NAME', '.' ]
+  args: [ 'build', '-t', 'europe-docker.pkg.dev/$PROJECT_ID/eu.gcr.io/simple-todo-list-app-01:$TAG_NAME', '.' ]
 
-images: [europe-docker.pkg.dev/$PROJECT_ID/eu.gcr.io:$TAG_NAME]
+images: [europe-docker.pkg.dev/$PROJECT_ID/eu.gcr.io/simple-todo-list-app-01:$TAG_NAME]

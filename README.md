@@ -1,2 +1,1 @@
-# simple-app example...
-
+# simple todo app example copied from some tutorial 
